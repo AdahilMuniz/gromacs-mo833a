@@ -16,6 +16,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      #Checkout repository
+      - uses: actions/checkout@v3
       # Create a build directory
       - run: mkdir build
       # Change to build directory
