@@ -23,5 +23,5 @@ jobs:
       # Change to build directory and run cmake
       - run: cd build && cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
       # Install
-      - run: make
-      - run: make install
+      - run: cd build && make
+      - run: cd build && make install
