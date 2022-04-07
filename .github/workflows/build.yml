@@ -18,9 +18,13 @@ jobs:
       #Checkout repository
       - uses: actions/checkout@v3
       # Create a build directory
-      - run: mkdir build
+      - name: Directory
+        run: mkdir build
       # Change to build directory and run cmake
-      - run: cd build && cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
+      - name: Cmake
+        run: cd build && cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
       # Install
-      - run: cd build && make
-      - run: cd build && make check
+      - name: Build
+        run: cd build && make
+      - name: Test
+        run: cd build && make check
