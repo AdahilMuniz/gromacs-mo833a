@@ -1,0 +1,30 @@
+name: build_gromacs
+
+on:
+  # Triggers on push and pull-request in branch 'manuel'
+  push:
+    branches: [ manuel ]
+  pull_request:
+    branches: [ manuel ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # Single job called "build"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      #Checkout repository
+      - uses: actions/checkout@v3
+      # Create a build directory
+      - name: Directory
+        run: mkdir build
+      # Change to build directory and run cmake
+      - name: Cmake
+        run: cd build && cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
+      # Install
+      - name: Build
+        run: cd build && make
+      - name: Test
+        run: cd build && make check
