@@ -3,9 +3,9 @@ name: build_gromacs
 on:
   # Triggers on push and pull-request in branch 'manuel'
   push:
-    branches: [ manuel ]
+    branches: [ manuel, ativ-3-exp-1 ]
   pull_request:
-    branches: [ manuel ]
+    branches: [ manuel, ativ-3-exp-1 ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
