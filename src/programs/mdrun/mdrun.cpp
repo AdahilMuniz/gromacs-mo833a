@@ -280,7 +280,7 @@ int gmx_mdrun(int argc, char* argv[])
 
     elapsed = mysecond();
     ret = runner.mdrunner();
-    elapsed = elapsed - mysecond();
+    elapsed = mysecond() - elapsed;
     printf("[MO833]: runner.mdrunner() exec. time: %f", elapsed);
     return ret;
 }
