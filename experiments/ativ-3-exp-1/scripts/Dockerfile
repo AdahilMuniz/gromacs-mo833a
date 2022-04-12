@@ -4,6 +4,8 @@ RUN apt-get update && \
     apt-get install wget -y && \
     apt-get install build-essential libssl-dev -y
 
+#Install CMAKE
+
 #Add gromacs directory from host into the container
 ADD ./ ./gromacs
 WORKDIR ./gromacs
