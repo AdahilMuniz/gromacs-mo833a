@@ -5,6 +5,12 @@ RUN apt-get update && \
     apt-get install build-essential libssl-dev -y
 
 #Install CMAKE
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.20.0/cmake-3.20.0.tar.gz
+RUN tar -zxvf cmake-3.20.0.tar.gz
+RUN cd cmake-3.20.0 && ./bootstrap
+RUN cd cmake-3.20.0 && make
+RUN cd cmake-3.20.0 && make install
+
 
 #Add gromacs directory from host into the container
 ADD ./ ./gromacs
@@ -12,17 +18,21 @@ WORKDIR ./gromacs
 
 #Build gromacs in release mode
 RUN mkdir build_release
-#RUN cd build_release && cmake .. -DCMAKE_BUILD_TYPE=Release -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
-#RUN cd build_release && make
+RUN cd build_release && cmake .. -DCMAKE_BUILD_TYPE=Release -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
+RUN cd build_release && make
 
 #Build gromacs in debug mode
 RUN mkdir build_debug
-#RUN cd build_debug && cmake .. -DCMAKE_BUILD_TYPE=Debug -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
-#RUN cd build_debug && make
+RUN cd build_debug && cmake .. -DCMAKE_BUILD_TYPE=Debug -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
+RUN cd build_debug && make
 
 #Alias
-ENV gmx_release=${PWD}/build_release/bin/gmx
-ENV gmx_debug=${PWD}/build_debug/bin/gmx
+#ENV gmx_release=${PWD}/build_release/bin/gmx
+#ENV gmx_debug=${PWD}/build_debug/bin/gmx
+ENV gmx_release=$(pwd)/build_release/bin/gmx
+ENV gmx_debug=$(pwd)/build_debug/bin/gmx
+
 
 #Excute Script
-CMD echo "Running script ..."
+#CMD echo "Running script ..."
+CMD cd ./experiments/ativ-3-exp-1/scripts/ && ./run.sh
