@@ -27,11 +27,8 @@ RUN cd build_debug && cmake .. -DCMAKE_BUILD_TYPE=Debug -DGMX_BUILD_OWN_FFTW=ON 
 RUN cd build_debug && make
 
 #Alias
-#ENV gmx_release=${PWD}/build_release/bin/gmx
-#ENV gmx_debug=${PWD}/build_debug/bin/gmx
-ENV gmx_release=$(pwd)/build_release/bin/gmx
-ENV gmx_debug=$(pwd)/build_debug/bin/gmx
-
+ENV gmx_release=/gromacs/build_release/bin/gmx
+ENV gmx_debug=/gromacs/build_debug/bin/gmx
 
 #Excute Script
 #CMD echo "Running script ..."
