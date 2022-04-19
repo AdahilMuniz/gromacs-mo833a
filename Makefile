@@ -7,8 +7,8 @@ help:
 	@echo "run_experiment ------ Run the experiment   "
 
 build_image:
-	sudo docker build -t $(REP_NAME):$(TAG) -f ./experiments/ativ-3-exp-1/scripts/Dockerfile .
+	docker build -t $(REP_NAME):$(TAG) -f ./experiments/ativ-3-exp-1/scripts/Dockerfile .
 
 run_experiment:
 	mkdir -p output
-	sudo docker run -it -v ${PWD}/output:/gromacs/experiments/ativ-3-exp-1/scripts/output $(REP_NAME):$(TAG)
+	docker run -it -v ${PWD}/output:/gromacs/experiments/ativ-3-exp-1/scripts/output $(REP_NAME):$(TAG)
